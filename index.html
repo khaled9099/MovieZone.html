@@ -1,0 +1,1852 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>MovieZone | Cinema</title>
+
+  <!-- W3.CSS -->
+  <link rel="stylesheet"
+        href="https://www.w3schools.com/w3css/5/w3.css">
+
+  <!-- Font -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900">
+
+  <!-- Icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+
+    body {
+      font-family: "Lato", sans-serif;
+      margin: 0;
+      background: #111;
+      color: white;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .mySlides {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+      transform: scale(1.04);
+    }
+
+    .mySlides.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+      height: 650px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 650px;
+      object-fit: cover;
+      filter: brightness(55%);
+    }
+
+    .hero-text {
+      position: absolute;
+      left: 8%;
+      top: 30%;
+      max-width: 600px;
+    }
+
+    .hero-text h1 {
+      font-size: 55px;
+      font-weight: 900;
+      margin: 0;
+    }
+
+    .hero-text p {
+      font-size: 20px;
+    }
+
+    .red {
+      color: #f44336;
+    }
+
+    /* SECTIONS */
+
+    .section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 70px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 34px;
+      font-weight: 800;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 35px;
+    }
+
+    .dark-section {
+      background: #181818;
+    }
+
+    /* MOVIE CARDS */
+
+    .movie-card {
+      background: #202020;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 25px;
+      transition: 0.3s;
+    }
+
+    .movie-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 10px 25px rgba(0,0,0,.5);
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 330px;
+      object-fit: cover;
+    }
+
+    .movie-info {
+      padding: 18px;
+    }
+
+    .movie-info h3 {
+      margin-top: 0;
+      font-weight: 700;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 9px;
+      margin-right: 5px;
+      margin-bottom: 8px;
+      background: #f44336;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .rating {
+      color: #ffd54f;
+      font-weight: bold;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* FEATURES */
+
+    .feature {
+      text-align: center;
+      padding: 25px;
+    }
+
+    .feature i {
+      font-size: 42px;
+      color: #f44336;
+      margin-bottom: 15px;
+    }
+
+    /* ABOUT */
+
+    .about-box {
+      background: #202020;
+      padding: 35px;
+      border-radius: 8px;
+      line-height: 1.8;
+    }
+
+    /* MODAL */
+
+    .booking-modal {
+      background: rgba(0,0,0,.85);
+    }
+
+    .modal-box {
+      max-width: 600px;
+      margin: 5% auto;
+      background: white;
+      color: #222;
+    }
+
+    .modal-header {
+      background: #f44336;
+      color: white;
+    }
+
+    .success-message {
+      display: none;
+      padding: 15px;
+      background: #4caf50;
+      color: white;
+      margin-top: 15px;
+      border-radius: 4px;
+    }
+
+    /* CONTACT */
+
+    .contact-input {
+      margin-bottom: 12px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #050505;
+      color: #aaa;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    footer i {
+      font-size: 22px;
+      margin: 8px;
+      cursor: pointer;
+    }
+
+    footer i:hover {
+      color: #f44336;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+
+      .hero,
+      .hero img {
+        height: 520px;
+      }
+
+      .hero-text {
+        left: 7%;
+        right: 7%;
+        top: 27%;
+      }
+
+      .hero-text h1 {
+        font-size: 38px;
+      }
+
+      .hero-text p {
+        font-size: 17px;
+      }
+
+      .movie-card img {
+        height: 380px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<div class="w3-top">
+
+  <div class="w3-bar w3-black w3-card">
+
+    <a href="#home"
+       class="w3-bar-item w3-button w3-padding-large">
+
+      <b>
+        <span class="red">MOVIE</span>ZONE
+      </b>
+
+    </a>
+
+
+    <a href="#movies"
+       class="w3-bar-item w3-button w3-padding-large w3-hide-small">
+
+      MOVIES
+
+    </a>
+
+
+    <a href="#coming"
+       class="w3-bar-item w3-button w3-padding-large w3-hide-small">
+
+      COMING SOON
+
+    </a>
+
+
+    <a href="#about"
+       class="w3-bar-item w3-button w3-padding-large w3-hide-small">
+
+      ABOUT
+
+    </a>
+
+
+    <a href="#contact"
+       class="w3-bar-item w3-button w3-padding-large w3-hide-small">
+
+      CONTACT
+
+    </a>
+
+
+    <!-- Mobile button -->
+
+    <a href="javascript:void(0)"
+       class="w3-bar-item w3-button w3-padding-large
+              w3-hide-large w3-hide-medium w3-right"
+       onclick="toggleMenu()">
+
+      <i class="fa fa-bars"></i>
+
+    </a>
+
+  </div>
+
+</div>
+
+
+<!-- MOBILE MENU -->
+
+<div id="mobileMenu"
+     class="w3-bar-block w3-black w3-hide w3-top"
+     style="margin-top:46px">
+
+  <a href="#movies"
+     class="w3-bar-item w3-button"
+     onclick="toggleMenu()">
+
+    MOVIES
+
+  </a>
+
+  <a href="#coming"
+     class="w3-bar-item w3-button"
+     onclick="toggleMenu()">
+
+    COMING SOON
+
+  </a>
+
+  <a href="#about"
+     class="w3-bar-item w3-button"
+     onclick="toggleMenu()">
+
+    ABOUT
+
+  </a>
+
+  <a href="#contact"
+     class="w3-bar-item w3-button"
+     onclick="toggleMenu()">
+
+    CONTACT
+
+  </a>
+
+</div>
+
+
+
+<!-- ================= HERO SLIDESHOW ================= -->
+
+<div id="home" class="hero">
+
+
+  <!-- Slide 1 -->
+
+  <div class="mySlides">
+
+    <img
+      src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1800&q=85">
+
+    <div class="hero-text">
+
+      <span class="tag">
+        NOW SHOWING
+      </span>
+
+      <h1>
+
+        YOUR NIGHT.<br>
+
+        <span class="red">
+          YOUR MOVIE.
+        </span>
+
+      </h1>
+
+      <p>
+
+        Experience the latest movies on the big screen
+        with premium sound and comfortable seats.
+
+      </p>
+
+      <a href="#movies"
+         class="w3-button w3-red w3-padding-large">
+
+        <i class="fa fa-film"></i>
+
+        VIEW MOVIES
+
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- Slide 2 -->
+
+  <div class="mySlides">
+
+    <img
+      src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1800&q=85">
+
+    <div class="hero-text">
+
+      <span class="tag">
+        PREMIUM CINEMA
+      </span>
+
+      <h1>
+
+        FEEL EVERY<br>
+
+        <span class="red">
+          SCENE.
+        </span>
+
+      </h1>
+
+      <p>
+
+        Enjoy crystal-clear picture quality
+        and powerful cinema sound.
+
+      </p>
+
+      <a href="#about"
+         class="w3-button w3-red w3-padding-large">
+
+        LEARN MORE
+
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- Slide 3 -->
+
+  <div class="mySlides">
+
+    <img
+      src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=1800&q=85">
+
+    <div class="hero-text">
+
+      <span class="tag">
+        BOOK ONLINE
+      </span>
+
+      <h1>
+
+        GRAB YOUR<br>
+
+        <span class="red">
+          SEAT.
+        </span>
+
+      </h1>
+
+      <p>
+
+        Choose your movie, select your seats
+        and book your cinema experience.
+
+      </p>
+
+      <a href="#movies"
+         class="w3-button w3-red w3-padding-large">
+
+        BOOK NOW
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ================= FEATURES ================= -->
+
+<div class="dark-section">
+
+  <div class="section">
+
+    <div class="w3-row">
+
+
+      <div class="w3-third feature">
+
+        <i class="fa fa-ticket"></i>
+
+        <h3>
+          Easy Booking
+        </h3>
+
+        <p>
+          Book your tickets quickly and easily.
+        </p>
+
+      </div>
+
+
+      <div class="w3-third feature">
+
+        <i class="fa fa-star"></i>
+
+        <h3>
+          Premium Experience
+        </h3>
+
+        <p>
+          Enjoy high-quality picture and sound.
+        </p>
+
+      </div>
+
+
+      <div class="w3-third feature">
+
+        <i class="fa fa-cutlery"></i>
+
+        <h3>
+          Snacks & Drinks
+        </h3>
+
+        <p>
+          Complete your movie night with your
+          favorite snacks.
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ================= NOW SHOWING ================= -->
+
+<div id="movies" class="section">
+
+  <h2 class="section-title">
+
+    NOW
+    <span class="red">
+      SHOWING
+    </span>
+
+  </h2>
+
+
+  <p class="section-subtitle">
+
+    Choose a movie and book your seat.
+
+  </p>
+
+
+  <div class="w3-row-padding">
+
+
+    <!-- ================= SPIDER-MAN ================= -->
+
+    <div class="w3-third">
+
+      <div class="movie-card">
+
+        <img
+          src="images.jpg"
+          alt="Spider-Man Brand New Day">
+
+        <div class="movie-info">
+
+          <span class="tag">
+            ACTION
+          </span>
+
+          <span class="tag">
+            PG-13
+          </span>
+
+          <h3>
+            Spider-Man: Brand New Day
+          </h3>
+
+          <p>
+
+            Peter Parker returns as Spider-Man
+            for an exciting new adventure.
+
+          </p>
+
+          <p class="rating">
+
+            ★ ★ ★ ★ ★
+
+            <span style="color:#aaa;">
+              4.8/5
+            </span>
+
+          </p>
+
+          <p>
+
+            <b>
+              2h 16min
+            </b>
+
+            &nbsp; | &nbsp;
+
+            English
+
+          </p>
+
+          <p class="price">
+
+            EGP 250
+
+          </p>
+
+          <button
+            class="w3-button w3-red w3-block"
+            onclick="openBooking('Spider-Man: Brand New Day',250)">
+
+            <i class="fa fa-ticket"></i>
+
+            BOOK TICKET
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================= THE ODYSSEY ================= -->
+
+    <div class="w3-third">
+
+      <div class="movie-card">
+
+        <img
+          src="images (1).jpg"
+          alt="The Odyssey">
+
+        <div class="movie-info">
+
+          <span class="tag">
+            ADVENTURE
+          </span>
+
+          <span class="tag">
+            PG-13
+          </span>
+
+          <h3>
+            The Odyssey
+          </h3>
+
+          <p>
+
+            Homer's legendary journey comes to life
+            in an epic adventure across the ancient world.
+
+          </p>
+
+          <p class="rating">
+
+            ★ ★ ★ ★ ★
+
+            <span style="color:#aaa;">
+              4.9/5
+            </span>
+
+          </p>
+
+          <p>
+
+            <b>
+              2h 49min
+            </b>
+
+            &nbsp; | &nbsp;
+
+            English
+
+          </p>
+
+          <p class="price">
+
+            EGP 280
+
+          </p>
+
+          <button
+            class="w3-button w3-red w3-block"
+            onclick="openBooking('The Odyssey',280)">
+
+            <i class="fa fa-ticket"></i>
+
+            BOOK TICKET
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================= MISSION IMPOSSIBLE ================= -->
+
+    <div class="w3-third">
+
+      <div class="movie-card">
+
+        <img
+          src="https://www.instagram.com/p/DI0RHQvvV97/media/?size=l"
+          alt="Mission Impossible The Final Reckoning">
+
+        <div class="movie-info">
+
+          <span class="tag">
+            ACTION
+          </span>
+
+          <span class="tag">
+            THRILLER
+          </span>
+
+          <h3>
+            Mission: Impossible – The Final Reckoning
+          </h3>
+
+          <p>
+
+            Ethan Hunt faces his most dangerous mission
+            in the explosive final chapter.
+
+          </p>
+
+          <p class="rating">
+
+            ★ ★ ★ ★ ☆
+
+            <span style="color:#aaa;">
+              4.6/5
+            </span>
+
+          </p>
+
+          <p>
+
+            <b>
+              2h 50min
+            </b>
+
+            &nbsp; | &nbsp;
+
+            English
+
+          </p>
+
+          <p class="price">
+
+            EGP 260
+
+          </p>
+
+          <button
+            class="w3-button w3-red w3-block"
+            onclick="openBooking('Mission: Impossible – The Final Reckoning',260)">
+
+            <i class="fa fa-ticket"></i>
+
+            BOOK TICKET
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- ================= COMING SOON ================= -->
+
+<div id="coming" class="dark-section">
+
+  <div class="section">
+
+
+    <h2 class="section-title">
+
+      COMING
+      <span class="red">
+        SOON
+      </span>
+
+    </h2>
+
+
+    <p class="section-subtitle">
+
+      Get ready for these upcoming movies.
+
+    </p>
+
+
+    <div class="w3-row-padding">
+
+
+      <!-- ================= AVENGERS DOOMSDAY ================= -->
+
+      <div class="w3-half">
+
+        <div class="w3-card movie-card">
+
+          <img
+            src="https://www.instagram.com/p/DcCCFuTDh5U/media/?size=l"
+            alt="Avengers Doomsday">
+
+          <div class="movie-info">
+
+            <span class="tag">
+              MARVEL
+            </span>
+
+            <span class="tag">
+              ACTION
+            </span>
+
+            <h3>
+              Avengers: Doomsday
+            </h3>
+
+            <p class="red">
+
+              <b>
+                Coming December 18, 2026
+              </b>
+
+            </p>
+
+            <p>
+
+              The Avengers, X-Men and Fantastic Four
+              unite against the powerful Doctor Doom.
+
+            </p>
+
+            <button
+              class="w3-button w3-white w3-text-black"
+              onclick="showTrailer('Avengers: Doomsday')">
+
+              <i class="fa fa-play"></i>
+
+              WATCH TRAILER
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ================= SPIDER-MAN BEYOND ================= -->
+
+      <div class="w3-half">
+
+        <div class="w3-card movie-card">
+
+          <img
+            src="https://image.tmdb.org/t/p/w780/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"
+            alt="Spider-Man Beyond the Spider-Verse">
+
+          <div class="movie-info">
+
+            <span class="tag">
+              ANIMATION
+            </span>
+
+            <span class="tag">
+              ACTION
+            </span>
+
+            <h3>
+              Spider-Man: Beyond the Spider-Verse
+            </h3>
+
+            <p class="red">
+
+              <b>
+                Coming Soon
+              </b>
+
+            </p>
+
+            <p>
+
+              Miles Morales returns for another
+              incredible adventure across the Spider-Verse.
+
+            </p>
+
+            <button
+              class="w3-button w3-white w3-text-black"
+              onclick="showTrailer('Spider-Man: Beyond the Spider-Verse')">
+
+              <i class="fa fa-play"></i>
+
+              WATCH TRAILER
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ================= ABOUT ================= -->
+
+<div id="about" class="section">
+
+  <h2 class="section-title">
+
+    ABOUT
+    <span class="red">
+      MOVIEZONE
+    </span>
+
+  </h2>
+
+
+  <p class="section-subtitle">
+
+    More than just a movie.
+
+  </p>
+
+
+  <div class="about-box">
+
+    <p>
+
+      MovieZone is a fictional modern cinema website
+      created as a web development project.
+
+      Our goal is to give visitors a simple and attractive
+      way to discover movies and book cinema tickets.
+
+    </p>
+
+
+    <p>
+
+      From action and science fiction to adventure and
+      animation, MovieZone offers something for everyone.
+
+      Our cinema experience combines comfortable seating,
+      large screens and powerful sound.
+
+    </p>
+
+
+    <div class="w3-row w3-center w3-margin-top">
+
+
+      <div class="w3-quarter">
+
+        <h2 class="red">
+          8+
+        </h2>
+
+        <p>
+          Cinema Screens
+        </p>
+
+      </div>
+
+
+      <div class="w3-quarter">
+
+        <h2 class="red">
+          50+
+        </h2>
+
+        <p>
+          Movies
+        </p>
+
+      </div>
+
+
+      <div class="w3-quarter">
+
+        <h2 class="red">
+          4K
+        </h2>
+
+        <p>
+          Picture Quality
+        </p>
+
+      </div>
+
+
+      <div class="w3-quarter">
+
+        <h2 class="red">
+          5.1
+        </h2>
+
+        <p>
+          Surround Sound
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ================= BOOKING MODAL ================= -->
+
+<div id="bookingModal"
+     class="w3-modal booking-modal">
+
+
+  <div class="w3-modal-content modal-box w3-animate-top">
+
+
+    <header class="w3-container modal-header">
+
+      <span
+        onclick="closeBooking()"
+        class="w3-button w3-display-topright w3-xlarge">
+
+        ×
+
+      </span>
+
+      <h2>
+
+        <i class="fa fa-ticket"></i>
+
+        BOOK YOUR TICKET
+
+      </h2>
+
+    </header>
+
+
+    <div class="w3-container w3-padding-24">
+
+
+      <h3 id="selectedMovie">
+        Movie
+      </h3>
+
+
+      <label>
+        <b>Date</b>
+      </label>
+
+      <input
+        id="bookingDate"
+        class="w3-input w3-border"
+        type="date">
+
+
+      <br>
+
+
+      <label>
+        <b>Show Time</b>
+      </label>
+
+
+      <select
+        id="showTime"
+        class="w3-select w3-border">
+
+        <option value="">
+          Choose a time
+        </option>
+
+        <option>
+          2:00 PM
+        </option>
+
+        <option>
+          5:00 PM
+        </option>
+
+        <option>
+          7:30 PM
+        </option>
+
+        <option>
+          10:00 PM
+        </option>
+
+      </select>
+
+
+      <br>
+      <br>
+
+
+      <label>
+
+        <b>
+          Number of Tickets
+        </b>
+
+      </label>
+
+
+      <input
+        id="ticketCount"
+        class="w3-input w3-border"
+        type="number"
+        min="1"
+        max="10"
+        value="1"
+        onchange="calculateTotal()">
+
+
+      <p>
+
+        Ticket price:
+
+        <b>
+          EGP <span id="ticketPrice">0</span>
+        </b>
+
+      </p>
+
+
+      <p>
+
+        Total:
+
+        <b class="red">
+
+          EGP <span id="totalPrice">
+            0
+          </span>
+
+        </b>
+
+      </p>
+
+
+      <hr>
+
+
+      <label>
+
+        <b>
+          Your Name
+        </b>
+
+      </label>
+
+
+      <input
+        id="customerName"
+        class="w3-input w3-border"
+        type="text"
+        placeholder="Enter your name">
+
+
+      <br>
+
+
+      <label>
+
+        <b>
+          Email
+        </b>
+
+      </label>
+
+
+      <input
+        id="customerEmail"
+        class="w3-input w3-border"
+        type="email"
+        placeholder="Enter your email">
+
+
+      <button
+        onclick="confirmBooking()"
+        class="w3-button w3-red w3-block w3-padding-large w3-margin-top">
+
+        <i class="fa fa-check"></i>
+
+        CONFIRM BOOKING
+
+      </button>
+
+
+      <div
+        id="successMessage"
+        class="success-message">
+
+        <b>
+          Booking successful!
+        </b>
+
+        <br>
+
+        Your ticket has been reserved.
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ================= TRAILER MODAL ================= -->
+
+<div id="trailerModal"
+     class="w3-modal booking-modal">
+
+
+  <div class="w3-modal-content modal-box w3-animate-top">
+
+
+    <header class="w3-container modal-header">
+
+      <span
+        onclick="closeTrailer()"
+        class="w3-button w3-display-topright w3-xlarge">
+
+        ×
+
+      </span>
+
+
+      <h2>
+
+        <i class="fa fa-play"></i>
+
+        TRAILER
+
+      </h2>
+
+    </header>
+
+
+    <div class="w3-container w3-padding-32 w3-center">
+
+
+      <i
+        class="fa fa-film"
+        style="font-size:60px;color:#f44336;">
+      </i>
+
+
+      <h2 id="trailerTitle">
+        Movie Trailer
+      </h2>
+
+
+      <p>
+
+        The trailer for this movie
+        will be available soon.
+
+      </p>
+
+
+      <button
+        onclick="closeTrailer()"
+        class="w3-button w3-black">
+
+        CLOSE
+
+      </button>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ================= CONTACT ================= -->
+
+<div id="contact"
+     class="dark-section">
+
+
+  <div class="section">
+
+
+    <h2 class="section-title">
+
+      CONTACT
+      <span class="red">
+        US
+      </span>
+
+    </h2>
+
+
+    <p class="section-subtitle">
+
+      Have a question?
+      Send us a message.
+
+    </p>
+
+
+    <div class="w3-row-padding">
+
+
+      <div class="w3-half">
+
+        <h3>
+          Get In Touch
+        </h3>
+
+
+        <p>
+
+          <i
+            class="fa fa-map-marker red"
+            style="width:30px">
+          </i>
+
+          25 Cinema Street, Cairo
+
+        </p>
+
+
+        <p>
+
+          <i
+            class="fa fa-phone red"
+            style="width:30px">
+          </i>
+
+          +20 100 123 4567
+
+        </p>
+
+
+        <p>
+
+          <i
+            class="fa fa-envelope red"
+            style="width:30px">
+          </i>
+
+          info@moviezone.com
+
+        </p>
+
+
+        <p>
+
+          <i
+            class="fa fa-clock-o red"
+            style="width:30px">
+          </i>
+
+          Open daily:
+          10:00 AM - 1:00 AM
+
+        </p>
+
+      </div>
+
+
+      <div class="w3-half">
+
+
+        <form onsubmit="sendMessage(event)">
+
+
+          <input
+            class="w3-input w3-border contact-input"
+            type="text"
+            placeholder="Name"
+            required>
+
+
+          <input
+            class="w3-input w3-border contact-input"
+            type="email"
+            placeholder="Email"
+            required>
+
+
+          <textarea
+            class="w3-input w3-border contact-input"
+            rows="5"
+            placeholder="Your message"
+            required>
+          </textarea>
+
+
+          <button
+            class="w3-button w3-red w3-right"
+            type="submit">
+
+            SEND MESSAGE
+
+            <i class="fa fa-paper-plane"></i>
+
+          </button>
+
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+  <h2>
+
+    <span class="red">
+      MOVIE
+    </span>ZONE
+
+  </h2>
+
+
+  <p>
+
+    Your movie. Your night. Your experience.
+
+  </p>
+
+
+  <div>
+
+    <i class="fa fa-facebook"></i>
+
+    <i class="fa fa-instagram"></i>
+
+    <i class="fa fa-twitter"></i>
+
+    <i class="fa fa-youtube"></i>
+
+  </div>
+
+
+  <p class="w3-small">
+
+    © 2026 MovieZone.
+
+    This is a fictional student project.
+
+  </p>
+
+</footer>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+
+/* ================= SLIDESHOW ================= */
+
+var slideIndex = 0;
+
+showSlides();
+
+
+function showSlides() {
+
+  var slides =
+    document.getElementsByClassName("mySlides");
+
+  for (var i = 0; i < slides.length; i++) {
+
+    slides[i].classList.remove("active");
+
+  }
+
+  slideIndex++;
+
+  if (slideIndex > slides.length) {
+
+    slideIndex = 1;
+
+  }
+
+  slides[slideIndex - 1].classList.add("active");
+
+  setTimeout(showSlides, 5000);
+
+}
+
+
+
+/* ================= MOBILE MENU ================= */
+
+function toggleMenu() {
+
+  var menu =
+    document.getElementById("mobileMenu");
+
+  if (menu.className.indexOf("w3-show") == -1) {
+
+    menu.className += " w3-show";
+
+  }
+
+  else {
+
+    menu.className =
+      menu.className.replace(" w3-show", "");
+
+  }
+
+}
+
+
+
+/* ================= BOOKING VARIABLES ================= */
+
+var selectedMovie = "";
+
+var selectedPrice = 0;
+
+
+
+/* ================= OPEN BOOKING ================= */
+
+function openBooking(movie, price) {
+
+  selectedMovie = movie;
+
+  selectedPrice = price;
+
+
+  document.getElementById("selectedMovie").innerText =
+    movie;
+
+
+  document.getElementById("ticketPrice").innerText =
+    price;
+
+
+  document.getElementById("ticketCount").value = 1;
+
+
+  document.getElementById("totalPrice").innerText =
+    price;
+
+
+  document.getElementById("successMessage").style.display =
+    "none";
+
+
+  document.getElementById("bookingModal").style.display =
+    "block";
+
+}
+
+
+
+/* ================= CLOSE BOOKING ================= */
+
+function closeBooking() {
+
+  document.getElementById("bookingModal").style.display =
+    "none";
+
+}
+
+
+
+/* ================= CALCULATE TOTAL ================= */
+
+function calculateTotal() {
+
+  var count =
+    document.getElementById("ticketCount").value;
+
+
+  if (count < 1) {
+
+    count = 1;
+
+    document.getElementById("ticketCount").value = 1;
+
+  }
+
+
+  if (count > 10) {
+
+    count = 10;
+
+    document.getElementById("ticketCount").value = 10;
+
+  }
+
+
+  var total =
+    selectedPrice * count;
+
+
+  document.getElementById("totalPrice").innerText =
+    total.toFixed(2);
+
+}
+
+
+
+/* ================= CONFIRM BOOKING ================= */
+
+function confirmBooking() {
+
+  var date =
+    document.getElementById("bookingDate").value;
+
+
+  var time =
+    document.getElementById("showTime").value;
+
+
+  var name =
+    document.getElementById("customerName").value;
+
+
+  var email =
+    document.getElementById("customerEmail").value;
+
+
+  if (
+    date == "" ||
+    time == "" ||
+    name == "" ||
+    email == ""
+  ) {
+
+    alert(
+      "Please fill in all booking information."
+    );
+
+    return;
+
+  }
+
+
+  var ticketCount =
+    document.getElementById("ticketCount").value;
+
+
+  var total =
+    selectedPrice * ticketCount;
+
+
+  document.getElementById("successMessage").style.display =
+    "block";
+
+
+  document.getElementById("successMessage").innerHTML =
+
+    "<b>Booking successful!</b><br>" +
+
+    "Thank you, " + name +
+
+    "! Your " + ticketCount +
+
+    " ticket(s) for " +
+
+    selectedMovie +
+
+    " have been reserved.<br>" +
+
+    "Total: EGP " +
+
+    total.toFixed(2);
+
+}
+
+
+
+/* ================= TRAILER ================= */
+
+function showTrailer(movie) {
+
+  document.getElementById("trailerTitle").innerText =
+    movie + " - Trailer";
+
+
+  document.getElementById("trailerModal").style.display =
+    "block";
+
+}
+
+
+
+function closeTrailer() {
+
+  document.getElementById("trailerModal").style.display =
+    "none";
+
+}
+
+
+
+/* ================= CONTACT FORM ================= */
+
+function sendMessage(event) {
+
+  event.preventDefault();
+
+
+  alert(
+    "Thank you! Your message has been sent."
+  );
+
+
+  event.target.reset();
+
+}
+
+
+
+/* ================= CLOSE MODALS ================= */
+
+window.onclick = function(event) {
+
+  var booking =
+    document.getElementById("bookingModal");
+
+
+  var trailer =
+    document.getElementById("trailerModal");
+
+
+  if (event.target == booking) {
+
+    booking.style.display = "none";
+
+  }
+
+
+  if (event.target == trailer) {
+
+    trailer.style.display = "none";
+
+  }
+
+};
+
+
+</script>
+
+
+</body>
+
+</html>
